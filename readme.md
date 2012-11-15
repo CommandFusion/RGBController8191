@@ -25,9 +25,12 @@ There are a few convenience functions built in:
 
 * setChannelLevel
 * setAllLevels
+* setRGBLevels
 * setAddress
 * startSequence
 * setSequenceTime
 * sendData
 
 The `sendData` function simply takes an array of integers representing a single protocol command, and creates the byte array with prefix and address bytes as per the protocol documentation, then sends it to the controller.
+
+See the [JavaScript code](RGBController8191/blob/master/rgbcontroller.js) for details on the parameters for each function.

@@ -33,6 +33,12 @@ var RGBController = function(params) {
 		self.sendData(0x52, parseInt(level/1.02));
 	};
 
+	self.setRGBLevels = function(r, g, b) {
+		self.setChannelLevel(1, r);
+		self.setChannelLevel(2, g);
+		self.setChannelLevel(3, b);
+	};
+
 	self.startSequence = function(seqNumber) {
 		if ([1,2,3,4,5,6,7].indexOf(seqNumber) == -1) {
 			CF.log("startSequence: sequence number must be between 1 and 7. '" + seqNumber + "' is not a valid sequence number.");

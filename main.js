@@ -5,13 +5,10 @@ var myColorPicker;
 CF.userMain = function() {
 	myColorPicker = new ColorPicker("picker.png", "s2", null, 250, function (r, g, b, x, y) {
 		// This code will be run everytime the pixel color is obtained, along with the pixel data as parameters
-		//CF.log("R: " + r + ", G: " + g + ", B: " + b);
-		myRGB.setChannelLevel(1, r);
-		myRGB.setChannelLevel(2, g);
-		myRGB.setChannelLevel(3, b);
+		myRGB.setRGBLevels(r, g, b);
 		// Show the color levels on the portrait page sliders
 		CF.setJoins([
-			{join: "a1", value: r*257},
+			{join: "a1", value: r*257}, // Multiply by 257 to scale values from 0-255 range to the 0-65535 range used by sliders
 			{join: "a2", value: g*257},
 			{join: "a3", value: b*257}
 		]);
