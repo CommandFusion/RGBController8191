@@ -2,7 +2,7 @@
 This module allows iViewer to control RGB LEDs via RS232 commands using the [8191 RGB Controller from Quasar Electronics](http://www.quasarelectronics.co.uk/8191-3-channel-high-current-rgb-led-controller-serial-rs232-ttl.htm).
 
 ## Protocol Documentation
-There is a PDF included that contains the [protocol documentation](blob/master/8191_Protocol.pdf) that was used to create the module.
+There is a PDF included that contains the [protocol documentation](RGBController8191/blob/master/8191_Protocol.pdf) that was used to create the module.
 
 ## Module Design
 This module uses JavaScript to implement the controller's protocol.
