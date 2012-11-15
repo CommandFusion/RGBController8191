@@ -34,9 +34,10 @@ var RGBController = function(params) {
 	};
 
 	self.setRGBLevels = function(r, g, b) {
+		// Send the three channel levels, with 75ms delay between each message
 		self.setChannelLevel(1, r);
-		self.setChannelLevel(2, g);
-		self.setChannelLevel(3, b);
+		setTimeout(function() { self.setChannelLevel(2, g); }, 75);
+		setTimeout(function() { self.setChannelLevel(3, b); }, 75);
 	};
 
 	self.startSequence = function(seqNumber) {
