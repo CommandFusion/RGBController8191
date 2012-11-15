@@ -16,19 +16,21 @@ var RGBController = function(params) {
 			CF.log("setChannelLevel: channel must be 1, 2 or 3. '" + channel + "' is not a valid channel.");
 			return;
 		}
-		if (level < 0 || level > 250) {
-			CF.log("setChannelLevel: level must be between 0 and 250. '" + level + "' is not a valid level.");
-			return;
+		if (level < 0) {
+			level = 0;
+		} else if (level > 255) {
+			level = 255;
 		}
-		self.sendData(0x42, channel, level);
+		self.sendData(0x42, channel, parseInt(level/1.02));
 	};
 
 	self.setAllLevels = function(level) {
-		if (level < 0 || level > 250) {
-			CF.log("setAllLevels: level must be between 0 and 250. '" + level + "' is not a valid level.");
-			return;
+		if (level < 0) {
+			level = 0;
+		} else if (level > 255) {
+			level = 255;
 		}
-		self.sendData(0x52, level);
+		self.sendData(0x52, parseInt(level/1.02));
 	};
 
 	self.startSequence = function(seqNumber) {

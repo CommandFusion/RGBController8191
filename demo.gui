@@ -35,6 +35,7 @@
   <scripts>
     <script name="rgbcontroller.js" />
     <script name="main.js" />
+    <script name="colorpicker.js" />
   </scripts>
   <page name="Startup" j="0" transition="" subtype="" time="0" ease="">
     <portrait t="portrait">
@@ -66,32 +67,7 @@
       </slider>
     </portrait>
     <landscape t="landscape">
-      <txt j="0" x="0" y="0" w="480" h="42" t="large_bold_c" wrap="False" l="0">RGB LED Controller:</txt>
-      <btn j="0" x="354" y="73" w="111" h="43" t="btn_single" href="http://www.quasarelectronics.co.uk/8191-3-channel-high-current-rgb-led-controller-serial-rs232-ttl.htm" flip="None" sim="1" l="0" s="1">
-        <inactive s="0">Product Homepage</inactive>
-        <active s="0">Product Homepage</active>
-      </btn>
-      <txt j="0" x="21" y="87" w="78" h="26" t="med_bol_c" wrap="False" l="0">Red</txt>
-      <txt j="0" x="0" y="39" w="480" h="26" t="grey_bold_c" wrap="False" l="0">8191 - 3-Channel High Current RGB LED Controller with RS232 Interface</txt>
-      <slider j="1" d="0" x="49" y="117" w="21" h="175" min="0" max="250" decimals="0" dragCmd="RedChannel" unit="decimal" t="gauge_v" sim="1" l="0">
-        <indicator state="0" offsetX="0" offsetY="0" x="0" y="0" w="0" h="0" t="">indicator.png</indicator>
-        <indicator state="1" offsetX="0" offsetY="0" zoom="100" />
-      </slider>
-      <txt j="0" x="91" y="87" w="78" h="26" t="med_bol_c" wrap="False" l="0">Green</txt>
-      <slider j="2" d="0" x="119" y="117" w="21" h="175" min="0" max="250" decimals="0" dragCmd="GreenChannel" unit="decimal" t="gauge_v" sim="1" l="0">
-        <indicator state="0" offsetX="0" offsetY="0" x="0" y="0" w="0" h="0" t="">indicator.png</indicator>
-        <indicator state="1" offsetX="0" offsetY="0" zoom="100" />
-      </slider>
-      <txt j="0" x="171" y="87" w="58" h="26" t="med_bol_c" wrap="False" l="0">Blue</txt>
-      <slider j="3" d="0" x="189" y="117" w="21" h="175" min="0" max="250" decimals="0" dragCmd="BlueChannel" unit="decimal" t="gauge_v" sim="1" l="0">
-        <indicator state="0" offsetX="0" offsetY="0" x="0" y="0" w="0" h="0" t="">indicator.png</indicator>
-        <indicator state="1" offsetX="0" offsetY="0" zoom="100" />
-      </slider>
-      <txt j="0" x="261" y="87" w="58" h="26" t="med_bol_c" wrap="False" l="0">All</txt>
-      <slider j="4" d="0" x="279" y="117" w="21" h="175" min="0" max="250" decimals="0" dragCmd="AllChannels" unit="decimal" t="gauge_v" sim="1" l="0">
-        <indicator state="0" offsetX="0" offsetY="0" x="0" y="0" w="0" h="0" t="">indicator.png</indicator>
-        <indicator state="1" offsetX="0" offsetY="0" zoom="100" />
-      </slider>
+      <img x="0" y="0" w="480" h="319" j="2" clickthrough="0" refresh="0" l="0" noCache="0" downloadIndicator="0" clearOnURLChange="0">picker.png<gesture name="Panning" type="pan" taps="1" touches="1"><action phase="change" js="myColorPicker.getColorAt(gesture.x, gesture.y, true);" /></gesture><gesture name="Tap" type="tap" taps="1" touches="1"><action phase="begin" js="myColorPicker.getColorAt(gesture.x, gesture.y, true);" /></gesture></img>
     </landscape>
   </page>
 </gui>
