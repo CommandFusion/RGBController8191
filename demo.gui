@@ -46,22 +46,22 @@
         <active s="0">Product Homepage</active>
       </btn>
       <txt j="0" x="7" y="134" w="78" h="26" t="med_bol_c" wrap="False" l="0">Red</txt>
-      <slider j="1" d="0" x="35" y="164" w="21" h="175" min="0" max="250" decimals="0" dragCmd="RedChannel" unit="decimal" t="gauge_v" sim="1" l="0">
+      <slider j="1" d="0" x="35" y="164" w="21" h="175" min="0" max="255" decimals="0" pressCmd="RedChannel" dragCmd="RedChannel" releaseCmd="RedChannel" unit="decimal" t="gauge_v" sim="1" l="0">
         <indicator state="0" offsetX="0" offsetY="0" x="0" y="0" w="0" h="0" t="">indicator.png</indicator>
         <indicator state="1" offsetX="0" offsetY="0" zoom="100" />
       </slider>
       <txt j="0" x="77" y="134" w="78" h="26" t="med_bol_c" wrap="False" l="0">Green</txt>
-      <slider j="2" d="0" x="105" y="164" w="21" h="175" min="0" max="250" decimals="0" dragCmd="GreenChannel" unit="decimal" t="gauge_v" sim="1" l="0">
+      <slider j="2" d="0" x="105" y="164" w="21" h="175" min="0" max="255" decimals="0" pressCmd="GreenChannel" dragCmd="GreenChannel" releaseCmd="GreenChannel" unit="decimal" t="gauge_v" sim="1" l="0">
         <indicator state="0" offsetX="0" offsetY="0" x="0" y="0" w="0" h="0" t="">indicator.png</indicator>
         <indicator state="1" offsetX="0" offsetY="0" zoom="100" />
       </slider>
       <txt j="0" x="157" y="134" w="58" h="26" t="med_bol_c" wrap="False" l="0">Blue</txt>
-      <slider j="3" d="0" x="175" y="164" w="21" h="175" min="0" max="250" decimals="0" dragCmd="BlueChannel" unit="decimal" t="gauge_v" sim="1" l="0">
+      <slider j="3" d="0" x="175" y="164" w="21" h="175" min="0" max="255" decimals="0" pressCmd="BlueChannel" dragCmd="BlueChannel" releaseCmd="BlueChannel" unit="decimal" t="gauge_v" sim="1" l="0">
         <indicator state="0" offsetX="0" offsetY="0" x="0" y="0" w="0" h="0" t="">indicator.png</indicator>
         <indicator state="1" offsetX="0" offsetY="0" zoom="100" />
       </slider>
       <txt j="0" x="247" y="134" w="58" h="26" t="med_bol_c" wrap="False" l="0">All</txt>
-      <slider j="4" d="0" x="265" y="164" w="21" h="175" min="0" max="250" decimals="0" dragCmd="AllChannels" unit="decimal" t="gauge_v" sim="1" l="0">
+      <slider j="4" d="0" x="265" y="164" w="21" h="175" min="0" max="255" decimals="0" pressCmd="AllChannels" dragCmd="AllChannels" releaseCmd="GreenChannel" unit="decimal" t="gauge_v" sim="1" l="0">
         <indicator state="0" offsetX="0" offsetY="0" x="0" y="0" w="0" h="0" t="">indicator.png</indicator>
         <indicator state="1" offsetX="0" offsetY="0" zoom="100" />
       </slider>

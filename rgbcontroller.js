@@ -56,13 +56,8 @@ var RGBController = function(params) {
 		var args = Array.prototype.slice.call(arguments);
 		// prepend the prefix and address bytes
 		args.unshift(self.prefix, self.address);
-		// create command from each byte passed to this function
-		var cmd = "";
-		for (var x in args) {
-			cmd += String.fromCharCode(args[x]);
-		}
-		// send it to the system
-		CF.send(self.systemName, cmd);
+		// send command as a string generated from each integer passed to this function
+		CF.send(self.systemName, String.fromCharCode.apply(null, args));
 	}
 
 	return self;
