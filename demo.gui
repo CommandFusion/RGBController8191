@@ -3,8 +3,8 @@
     <project>RGB Controller Demo</project>
     <designer>CommandFusion</designer>
     <size>
-      <portrait width="320" height="480" />
-      <landscape width="480" height="320" />
+      <portrait width="768" height="1024" />
+      <landscape width="1024" height="768" />
     </size>
     <imagefolder>
     </imagefolder>
@@ -12,62 +12,60 @@
   </properties>
   <systems>
     <system name="RGBController" ip="192.168.0.10" port="10208" protocol="tcp" alwayson="1" offlinequeue="0" accept="0" acceptBroadcasts="0" ssl="0" maxconnections="0" heartbeatRx="" heartbeatTx="" heartbeatMode="-1" eom="" connectionStatus="0" disconnectionStatus="0">
-      <cmd name="RedChannel" js="myRGB.setChannelLevel(1, data)" jsSendsCommand="True">[sliderval]</cmd>
-      <cmd name="GreenChannel" js="myRGB.setChannelLevel(2, data)" jsSendsCommand="True">[sliderval]</cmd>
-      <cmd name="BlueChannel" js="myRGB.setChannelLevel(3, data)" jsSendsCommand="True">[sliderval]</cmd>
-      <cmd name="AllChannels" js="myRGB.setAllLevels(data)" jsSendsCommand="True">[sliderval]</cmd>
+      <cmd name="RedChannel" js="myRGB.setChannelLevel(1, data, true)" jsSendsCommand="True">[sliderval]</cmd>
+      <cmd name="GreenChannel" js="myRGB.setChannelLevel(2, data, true)" jsSendsCommand="True">[sliderval]</cmd>
+      <cmd name="BlueChannel" js="myRGB.setChannelLevel(3, data, true)" jsSendsCommand="True">[sliderval]</cmd>
+      <cmd name="AllChannels" js="myRGB.setAllLevels(data, true)" jsSendsCommand="True">[sliderval]</cmd>
     </system>
   </systems>
   <themes>
-    <theme type="background" name=".landscape"><![CDATA[ background-image: url(bg_landscape.png); background-repeat: no-repeat;]]></theme>
     <theme type="text" name=".large_bold_c"><![CDATA[ text-shadow: rgba(0,0,0,1) 0px 1px 0px; color: White; font-size: 22px; font-family: 'Arial'; text-align: center; vertical-align: middle; font-weight: bold; font-style: none; text-decoration: none; display: table-cell;]]></theme>
     <theme type="button" name=".btn_single[state='0']"><![CDATA[padding: 0px 20px 0px 20px; -webkit-border-image: url(btn_single_off.png) 0 20 0 20; text-shadow: rgba(0,0,0,1) 0px 1px 1px; color: White; font-size: 12px; font-family: 'Verdana'; font-weight: normal; font-style: none; text-decoration: none; text-align: center; vertical-align: middle; display: table-cell; box-sizing: border-box; -webkit-box-sizing: border-box; -webkit-tap-highlight-color:rgba(0,0,0,0);]]></theme>
     <theme type="button" name=".btn_single[state='1']"><![CDATA[padding: 0px 20px 0px 20px; -webkit-border-image: url(btn_single_on.png) 0 20 0 20; text-shadow: rgba(53,202,244,1) 0px 0px 3px; color: #9DCEFF; font-size: 12px; font-family: 'Verdana'; font-weight: normal; font-style: none; text-decoration: none; text-align: center; vertical-align: middle; display: table-cell; box-sizing: border-box; -webkit-box-sizing: border-box; -webkit-tap-highlight-color:rgba(0,0,0,0);]]></theme>
-    <theme type="text" name=".small_bold_c"><![CDATA[ text-shadow: rgba(0,0,0,1) 0px 1px 0px; color: White; font-size: 12px; font-family: 'Arial'; text-align: center; vertical-align: middle; font-weight: bold; font-style: none; text-decoration: none; display: table-cell;]]></theme>
-    <theme type="text" name=".grey_bold_l"><![CDATA[ text-shadow: rgba(0,0,0,1) 0px -1px 0px; color: Silver; font-size: 12px; font-family: 'Arial'; text-align: left; vertical-align: middle; font-weight: bold; font-style: none; text-decoration: none; display: table-cell;]]></theme>
     <theme type="text" name=".grey_bold_c"><![CDATA[ text-shadow: rgba(0,0,0,1) 0px -1px 0px; color: Silver; font-size: 12px; font-family: 'Arial'; text-align: center; vertical-align: middle; font-weight: bold; font-style: none; text-decoration: none; display: table-cell;]]></theme>
     <theme type="gauge" name=".gauge_v[state='0']"><![CDATA[ background-image: url(gauge_v_off.png);]]></theme>
     <theme type="gauge" name=".gauge_v[state='1']"><![CDATA[ background-image: url(gauge_v_on.png);]]></theme>
-    <theme type="text" name=".med_bol_r"><![CDATA[ text-shadow: rgba(0,0,0,1) 0px 1px 0px; color: White; font-size: 16px; font-family: 'Arial'; text-align: right; vertical-align: middle; font-weight: bold; font-style: none; text-decoration: none; display: table-cell;]]></theme>
     <theme type="text" name=".med_bol_c"><![CDATA[ text-shadow: rgba(0,0,0,1) 0px 1px 0px; color: White; font-size: 16px; font-family: 'Arial'; text-align: center; vertical-align: middle; font-weight: bold; font-style: none; text-decoration: none; display: table-cell;]]></theme>
-    <theme type="background" name=".portrait"><![CDATA[ background-image: url(bg_portrait.png); background-repeat: no-repeat;]]></theme>
   </themes>
   <scripts>
     <script name="rgbcontroller.js" />
     <script name="main.js" />
     <script name="colorpicker.js" />
   </scripts>
-  <page name="Startup" j="0" transition="" subtype="" time="0" ease="">
-    <portrait t="portrait">
-      <txt j="0" x="0" y="0" w="320" h="42" t="large_bold_c" wrap="False" l="0">RGB LED Controller:</txt>
-      <txt j="0" x="4" y="39" w="313" h="48" t="grey_bold_c" wrap="True" l="0">8191 - 3-Channel High Current RGB LED Controller with RS232 Interface</txt>
-      <btn j="0" x="104" y="434" w="111" h="43" t="btn_single" href="http://www.quasarelectronics.co.uk/8191-3-channel-high-current-rgb-led-controller-serial-rs232-ttl.htm" flip="None" sim="1" l="0" s="1">
+  <page name="Startup" j="0" transition="None" subtype="None" time="0" ease="">
+    <portrait />
+    <landscape>
+      <img x="0" y="0" w="606" h="768" j="2" clickthrough="0" refresh="0" l="0" noCache="0" downloadIndicator="0" clearOnURLChange="0">picker-large.png<gesture name="Panning" type="pan" taps="1" touches="1"><action phase="change" js="myColorPicker.getColorAt(gesture.x, gesture.y, true);" /></gesture><gesture name="Tap" type="tap" taps="1" touches="1"><action phase="begin" js="myColorPicker.getColorAt(gesture.x, gesture.y, true);" /></gesture></img>
+      <txt j="11" x="668" y="277" w="78" h="26" t="grey_bold_c" wrap="False" l="0">0</txt>
+      <slider j="1" d="0" x="696" y="313" w="21" h="175" min="0" max="255" decimals="0" pressCmd="RedChannel" dragCmd="RedChannel" releaseCmd="RedChannel" unit="decimal" t="gauge_v" sim="1" l="0">
+        <indicator state="0" offsetX="0" offsetY="0" x="0" y="0" w="0" h="0" t="">indicator.png</indicator>
+        <indicator state="1" offsetX="0" offsetY="0" zoom="100" />
+      </slider>
+      <txt j="12" x="749" y="277" w="78" h="26" t="grey_bold_c" wrap="False" l="0">0</txt>
+      <slider j="2" d="0" x="777" y="313" w="21" h="175" min="0" max="255" decimals="0" pressCmd="GreenChannel" dragCmd="GreenChannel" releaseCmd="GreenChannel" unit="decimal" t="gauge_v" sim="1" l="0">
+        <indicator state="0" offsetX="0" offsetY="0" x="0" y="0" w="0" h="0" t="">indicator.png</indicator>
+        <indicator state="1" offsetX="0" offsetY="0" zoom="100" />
+      </slider>
+      <txt j="13" x="843" y="277" w="58" h="26" t="grey_bold_c" wrap="False" l="0">0</txt>
+      <slider j="3" d="0" x="861" y="313" w="21" h="175" min="0" max="255" decimals="0" pressCmd="BlueChannel" dragCmd="BlueChannel" releaseCmd="BlueChannel" unit="decimal" t="gauge_v" sim="1" l="0">
+        <indicator state="0" offsetX="0" offsetY="0" x="0" y="0" w="0" h="0" t="">indicator.png</indicator>
+        <indicator state="1" offsetX="0" offsetY="0" zoom="100" />
+      </slider>
+      <txt j="14" x="929" y="277" w="58" h="26" t="grey_bold_c" wrap="False" l="0">0</txt>
+      <slider j="4" d="0" x="951" y="313" w="21" h="175" min="0" max="255" decimals="0" pressCmd="AllChannels" dragCmd="AllChannels" releaseCmd="GreenChannel" unit="decimal" t="gauge_v" sim="1" l="0">
+        <indicator state="0" offsetX="0" offsetY="0" x="0" y="0" w="0" h="0" t="">indicator.png</indicator>
+        <indicator state="1" offsetX="0" offsetY="0" zoom="100" />
+      </slider>
+      <txt j="0" x="668" y="243" w="78" h="26" t="med_bol_c" wrap="False" l="0">Red</txt>
+      <txt j="0" x="749" y="243" w="78" h="26" t="med_bol_c" wrap="False" l="0">Green</txt>
+      <txt j="0" x="843" y="243" w="58" h="26" t="med_bol_c" wrap="False" l="0">Blue</txt>
+      <txt j="0" x="929" y="243" w="58" h="26" t="med_bol_c" wrap="False" l="0">All</txt>
+      <txt j="0" x="677" y="112" w="320" h="42" t="large_bold_c" wrap="False" l="0">RGB LED Controller:</txt>
+      <txt j="0" x="681" y="151" w="313" h="48" t="grey_bold_c" wrap="True" l="0">8191 - 3-Channel High Current RGB LED Controller with RS232 Interface</txt>
+      <btn j="0" x="782" y="605" w="111" h="43" t="btn_single" href="http://www.quasarelectronics.co.uk/8191-3-channel-high-current-rgb-led-controller-serial-rs232-ttl.htm" flip="None" sim="1" l="0" s="1">
         <inactive s="0">Product Homepage</inactive>
         <active s="0">Product Homepage</active>
       </btn>
-      <txt j="0" x="7" y="134" w="78" h="26" t="med_bol_c" wrap="False" l="0">Red</txt>
-      <slider j="1" d="0" x="35" y="164" w="21" h="175" min="0" max="255" decimals="0" pressCmd="RedChannel" dragCmd="RedChannel" releaseCmd="RedChannel" unit="decimal" t="gauge_v" sim="1" l="0">
-        <indicator state="0" offsetX="0" offsetY="0" x="0" y="0" w="0" h="0" t="">indicator.png</indicator>
-        <indicator state="1" offsetX="0" offsetY="0" zoom="100" />
-      </slider>
-      <txt j="0" x="77" y="134" w="78" h="26" t="med_bol_c" wrap="False" l="0">Green</txt>
-      <slider j="2" d="0" x="105" y="164" w="21" h="175" min="0" max="255" decimals="0" pressCmd="GreenChannel" dragCmd="GreenChannel" releaseCmd="GreenChannel" unit="decimal" t="gauge_v" sim="1" l="0">
-        <indicator state="0" offsetX="0" offsetY="0" x="0" y="0" w="0" h="0" t="">indicator.png</indicator>
-        <indicator state="1" offsetX="0" offsetY="0" zoom="100" />
-      </slider>
-      <txt j="0" x="157" y="134" w="58" h="26" t="med_bol_c" wrap="False" l="0">Blue</txt>
-      <slider j="3" d="0" x="175" y="164" w="21" h="175" min="0" max="255" decimals="0" pressCmd="BlueChannel" dragCmd="BlueChannel" releaseCmd="BlueChannel" unit="decimal" t="gauge_v" sim="1" l="0">
-        <indicator state="0" offsetX="0" offsetY="0" x="0" y="0" w="0" h="0" t="">indicator.png</indicator>
-        <indicator state="1" offsetX="0" offsetY="0" zoom="100" />
-      </slider>
-      <txt j="0" x="247" y="134" w="58" h="26" t="med_bol_c" wrap="False" l="0">All</txt>
-      <slider j="4" d="0" x="265" y="164" w="21" h="175" min="0" max="255" decimals="0" pressCmd="AllChannels" dragCmd="AllChannels" releaseCmd="GreenChannel" unit="decimal" t="gauge_v" sim="1" l="0">
-        <indicator state="0" offsetX="0" offsetY="0" x="0" y="0" w="0" h="0" t="">indicator.png</indicator>
-        <indicator state="1" offsetX="0" offsetY="0" zoom="100" />
-      </slider>
-    </portrait>
-    <landscape t="landscape">
-      <img x="0" y="0" w="480" h="319" j="2" clickthrough="0" refresh="0" l="0" noCache="0" downloadIndicator="0" clearOnURLChange="0">picker.png<gesture name="Panning" type="pan" taps="1" touches="1"><action phase="change" js="myColorPicker.getColorAt(gesture.x, gesture.y, true);" /></gesture><gesture name="Tap" type="tap" taps="1" touches="1"><action phase="begin" js="myColorPicker.getColorAt(gesture.x, gesture.y, true);" /></gesture></img>
     </landscape>
   </page>
 </gui>

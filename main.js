@@ -3,9 +3,9 @@ var myColorPicker;
 
 // Only one CF.userMain function in all scripts is allowed!
 CF.userMain = function() {
-	myColorPicker = new ColorPicker("picker.png", "s2", null, 250, function (r, g, b, x, y) {
+	myColorPicker = new ColorPicker("picker-large.png", "s2", null, 250, function (r, g, b, x, y) {
 		// This code will be run everytime the pixel color is obtained, along with the pixel data as parameters
-		myRGB.setRGBLevels(r, g, b);
+		myRGB.setRGBLevels(r, g, b, false);
 		// Show the color levels on the portrait page sliders
 		CF.setJoins([
 			{join: "a1", value: r*257}, // Multiply by 257 to scale values from 0-255 range to the 0-65535 range used by sliders
@@ -13,6 +13,13 @@ CF.userMain = function() {
 			{join: "a3", value: b*257}
 		]);
 	});
+
+	// This function gets called whenever a single channel of the controller is changed
+	myRGB.callback = function (channel, level) {
+		CF.log("test");
+		CF.setJoin("s1" + channel, level);
+	}
+
 	// Setup the colorpicker object after it was created above
 	myColorPicker.setup();
 };

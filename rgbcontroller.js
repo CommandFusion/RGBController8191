@@ -5,15 +5,16 @@ var RGBController = function(params) {
 		prefix: 0xFE,
 		address: params.address || 0x4C,
 		systemName: params.systemName || "RGBController",
-		k : new KeySpline(0.96,0.2,0.9,0.69) // This is used to change the curve of light intensity - LEDs intensity change is much more noticable at bottom end of the scale
+		k : new KeySpline(0.96,0.2,0.9,0.69), // This is used to change the curve of light intensity - LEDs intensity change is much more noticable at bottom end of the scale
 		// Use the live demo tool on this page to change the curve values for the above KeySpline function: http://blog.greweb.fr/2012/02/bezier-curve-based-easing-functions-from-concept-to-implementation/
+		callback: null // function to be called when setRGB is called
 	};
 
 	self.setAddress = function(newAddress) {
 		self.sendData(0x41, newAddress);
 	};
 
-	self.setChannelLevel = function(channel, level) {
+	self.setChannelLevel = function(channel, level, doScale) {
 		if ([1,2,3].indexOf(channel) == -1) {
 			CF.log("setChannelLevel: channel must be 1, 2 or 3. '" + channel + "' is not a valid channel.");
 			return;
@@ -23,18 +24,28 @@ var RGBController = function(params) {
 		} else if (level > 255) {
 			level = 255;
 		}
-		var time = (1/250) * (level/1.02);
-		var newLevel = parseInt(250 * self.k.get(time));
+		var newLevel;
+		if (doScale) {
+			var time = (1/250) * (level/1.02);
+			newLevel = parseInt(250 * self.k.get(time));
+		} else {
+			newLevel = parseInt(level/1.02);
+		}
+
 		self.sendData(0x42, channel, newLevel);
+
+		if (self.callback) {
+			self.callback(channel, newLevel);
+		}
 	};
 
-	self.setAllLevels = function(level) {
+	self.setAllLevels = function(level, doScale) {
 		if (level < 0) {
 			level = 0;
 		} else if (level > 255) {
 			level = 255;
 		}
-		self.sendData(0x52, parseInt(level/1.02));
+		self.sendData(0x52, parseInt(level/1.02), doScale);
 	};
 
 	self.setRGBLevels = function(r, g, b) {
