@@ -63,6 +63,10 @@ var RGBController = function(params) {
 		self.sendData(0x43, seqNumber);
 	};
 
+	self.stopSequence = function() {
+		self.sendData(0x43, 0);
+	};
+
 	self.setSequenceTime = function(seqNumber) {
 		self.sendData(0x43, seqNumber);
 	};
