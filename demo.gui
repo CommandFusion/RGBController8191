@@ -11,7 +11,7 @@
     <debug loaderrors="0" connectionerrors="0" />
   </properties>
   <systems>
-    <system name="RGBController" ip="192.168.0.10" port="10208" protocol="tcp" alwayson="1" offlinequeue="0" accept="0" acceptBroadcasts="0" ssl="0" maxconnections="0" heartbeatRx="" heartbeatTx="" heartbeatMode="-1" eom="" connectionStatus="0" disconnectionStatus="0">
+    <system name="RGBController" ip="192.168.0.11" port="10207" protocol="tcp" alwayson="1" offlinequeue="0" accept="0" acceptBroadcasts="0" ssl="0" maxconnections="0" heartbeatRx="" heartbeatTx="" heartbeatMode="-1" eom="" connectionStatus="0" disconnectionStatus="0">
       <cmd name="RedChannel" js="myRGB.setChannelLevel(1, data, true)" jsSendsCommand="True">[sliderval]</cmd>
       <cmd name="GreenChannel" js="myRGB.setChannelLevel(2, data, true)" jsSendsCommand="True">[sliderval]</cmd>
       <cmd name="BlueChannel" js="myRGB.setChannelLevel(3, data, true)" jsSendsCommand="True">[sliderval]</cmd>
@@ -28,9 +28,9 @@
     <theme type="text" name=".med_bol_c"><![CDATA[ text-shadow: rgba(0,0,0,1) 0px 1px 0px; color: White; font-size: 16px; font-family: 'Arial'; text-align: center; vertical-align: middle; font-weight: bold; font-style: none; text-decoration: none; display: table-cell;]]></theme>
   </themes>
   <scripts>
-    <script name="rgbcontroller.js" />
-    <script name="main.js" />
-    <script name="colorpicker.js" />
+    <script name="scripts/rgbcontroller.js" />
+    <script name="scripts/main.js" />
+    <script name="scripts/colorpicker.js" />
   </scripts>
   <page name="Startup" j="0" transition="None" subtype="None" time="0" ease="">
     <portrait />
@@ -52,7 +52,7 @@
         <indicator state="1" offsetX="0" offsetY="0" zoom="100" />
       </slider>
       <txt j="14" x="929" y="277" w="58" h="26" t="grey_bold_c" wrap="False" l="0">0</txt>
-      <slider j="4" d="0" x="951" y="313" w="21" h="175" min="0" max="255" decimals="0" pressCmd="AllChannels" dragCmd="AllChannels" releaseCmd="GreenChannel" unit="decimal" t="gauge_v" sim="1" l="0">
+      <slider j="4" d="0" x="951" y="313" w="21" h="175" min="0" max="255" decimals="0" pressCmd="AllChannels" dragCmd="AllChannels" releaseCmd="AllChannels" unit="decimal" t="gauge_v" sim="1" l="0">
         <indicator state="0" offsetX="0" offsetY="0" x="0" y="0" w="0" h="0" t="">indicator.png</indicator>
         <indicator state="1" offsetX="0" offsetY="0" zoom="100" />
       </slider>
@@ -61,10 +61,16 @@
       <txt j="0" x="843" y="243" w="58" h="26" t="med_bol_c" wrap="False" l="0">Blue</txt>
       <txt j="0" x="929" y="243" w="58" h="26" t="med_bol_c" wrap="False" l="0">All</txt>
       <txt j="0" x="677" y="112" w="320" h="42" t="large_bold_c" wrap="False" l="0">RGB LED Controller:</txt>
-      <txt j="0" x="681" y="151" w="313" h="48" t="grey_bold_c" wrap="True" l="0">8191 - 3-Channel High Current RGB LED Controller with RS232 Interface</txt>
+      <txt j="0" x="682" y="151" w="312" h="48" t="grey_bold_c" wrap="True" l="0">8191 - 3-Channel High Current RGB LED Controller with RS232 Interface</txt>
       <btn j="0" x="782" y="605" w="111" h="43" t="btn_single" href="http://www.quasarelectronics.co.uk/8191-3-channel-high-current-rgb-led-controller-serial-rs232-ttl.htm" flip="None" sim="1" l="0" s="1">
         <inactive s="0">Product Homepage</inactive>
         <active s="0">Product Homepage</active>
+      </btn>
+      <txt j="15" x="800" y="553" w="78" h="26" t="grey_bold_c" wrap="False" l="0">0</txt>
+      <txt j="0" x="800" y="519" w="78" h="26" t="med_bol_c" wrap="False" l="0">Alpha</txt>
+      <btn j="0" x="196" y="687" w="214" h="43" t="btn_single" flip="None" sim="1" l="0" s="1" js="toggleFire()">
+        <inactive s="0">Toggle Flickering Fire Effect</inactive>
+        <active s="0">Toggle Flickering Fire Effect</active>
       </btn>
     </landscape>
   </page>
