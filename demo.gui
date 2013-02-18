@@ -1,3 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <gui>
   <properties>
     <project>RGB Controller Demo</project>
@@ -35,7 +36,7 @@
   <page name="Startup" j="0" transition="None" subtype="None" time="0" ease="">
     <portrait />
     <landscape>
-      <img x="0" y="0" w="606" h="768" j="2" clickthrough="0" refresh="0" l="0" noCache="0" downloadIndicator="0" clearOnURLChange="0">picker-large.png<gesture name="Panning" type="pan" taps="1" touches="1"><action phase="change" js="myColorPicker.getColorAt(gesture.x, gesture.y, true);" /></gesture><gesture name="Tap" type="tap" taps="1" touches="1"><action phase="begin" js="myColorPicker.getColorAt(gesture.x, gesture.y, true);" /></gesture></img>
+      <img x="0" y="0" w="606" h="768" j="2" clickthrough="0" refresh="0" l="0" noCache="0" downloadIndicator="0" clearOnURLChange="0">picker-large.png<gesture name="Panning" type="pan" taps="1" touches="1"><action phase="change" js="myColorPicker.getColorAt(gesture.x, gesture.y, true, true);" /></gesture><gesture name="Tap" type="tap" taps="1" touches="1"><action phase="begin" js="myColorPicker.getColorAt(gesture.x, gesture.y, true, false);" /></gesture></img>
       <txt j="11" x="668" y="277" w="78" h="26" t="grey_bold_c" wrap="False" l="0">0</txt>
       <slider j="1" d="0" x="696" y="313" w="21" h="175" min="0" max="255" decimals="0" pressCmd="RedChannel" dragCmd="RedChannel" releaseCmd="RedChannel" unit="decimal" t="gauge_v" sim="1" l="0">
         <indicator state="0" offsetX="0" offsetY="0" x="0" y="0" w="0" h="0" t="">indicator.png</indicator>

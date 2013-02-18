@@ -73,7 +73,7 @@ var ColorPicker = function(url, pickerJoin, hoverJoin, freq, callback) {
 		});
 	};
 
-	self.getColorAt = function (x, y, dolimitRate) {
+	self.getColorAt = function (x, y, dolimitRate, wasDragged) {
 		// Check if sending too quickly
 		if (dolimitRate && (Date.now() - self.lastSend < self.freq)) {
 			return;
@@ -86,7 +86,7 @@ var ColorPicker = function(url, pickerJoin, hoverJoin, freq, callback) {
 		var pixel = self.ctx.getImageData(x, y, 1, 1);
 		CF.setProperties({join: self.hoverJoin, x: x - (self.hoverImageData.w / 2) + self.pickerData.x, y: y - (self.hoverImageData.h / 2) + self.pickerData.y});
 		self.lastSend = Date.now();
-		self.callback(pixel.data[0], pixel.data[1], pixel.data[2], pixel.data[3], x, y);
+		self.callback(pixel.data[0], pixel.data[1], pixel.data[2], pixel.data[3], x, y, wasDragged);
 	};
 
 	return self;
