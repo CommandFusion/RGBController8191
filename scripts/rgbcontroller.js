@@ -12,7 +12,11 @@ var RGBController = function(params) {
 		},
 		k : new KeySpline(0.96,0.2,0.9,0.69), // This is used to change the curve of light intensity - LEDs intensity change is much more noticable at bottom end of the scale
 		// Use the live demo tool on this page to change the curve values for the above KeySpline function: http://blog.greweb.fr/2012/02/bezier-curve-based-easing-functions-from-concept-to-implementation/
-		callback: null // function to be called when setRGB is called
+		callback: null, // function to be called when setRGB is called
+		lastValues: [0,0,0],
+		rFader: null,
+		gFader: null,
+		bFader: null
 	};
 
 	self.setAddress = function(newAddress) {
@@ -24,6 +28,7 @@ var RGBController = function(params) {
 			CF.log("setChannelLevel: channel must be 1, 2 or 3. '" + channel + "' is not a valid channel.");
 			return;
 		}
+		//CF.log("setChannelLevel: " + channel + " = " + level);
 		var newLevel;
 		if (doScale) {
 			var time = (1/250) * (level/1.02);
@@ -37,7 +42,7 @@ var RGBController = function(params) {
 		} else if (newLevel > 250) {
 			newLevel = 250;
 		}
-
+		self.lastValues[channel-1] = newLevel;
 		self.sendData(0x42, channel, newLevel);
 
 		// if (self.callback) {
@@ -51,14 +56,38 @@ var RGBController = function(params) {
 		} else if (level > 250) {
 			level = 250;
 		}
+		self.lastValues[0] = level;
+		self.lastValues[1] = level;
+		self.lastValues[2] = level;
+
 		self.sendData(0x52, parseInt(level/1.02), doScale);	
 	};
 
-	self.setRGBLevels = function(r, g, b) {
-		// Send the three channel levels separately, with 75ms delay between each message
-		self.setChannelLevel(1, r);
-		setTimeout(function() { self.setChannelLevel(2, g); }, 75);
-		setTimeout(function() { self.setChannelLevel(3, b); }, 75);
+	self.setRGBLevels = function(r, g, b, doFade) {
+		// Fade to the chosen level
+		if (self.rFader) {
+			self.rFader.stopFade();
+		}
+		if (self.gFader) {
+			self.gFader.stopFade();
+		}
+		if (self.bFader) {
+			self.bFader.stopFade();
+		}
+		if (!doFade) {
+			// Send the three channel levels separately, with 75ms delay between each message
+			self.setChannelLevel(1, r);
+			setTimeout(function() { self.setChannelLevel(2, g); }, 75);
+			setTimeout(function() { self.setChannelLevel(3, b); }, 75);
+		} else {
+			self.rFader = new Fader(self, self.lastValues[0], r, 500, 10);
+			self.gFader = new Fader(self, self.lastValues[1], g, 500, 10);
+			self.bFader = new Fader(self, self.lastValues[2], b, 500, 10);
+
+			self.rFader.startFade("r");
+			self.gFader.startFade("g");
+			self.bFader.startFade("b");
+		}
 	};
 
 	self.startSequence = function(seqNumber) {
@@ -142,4 +171,62 @@ function KeySpline (mX1, mY1, mX2, mY2) {
     }
     return aGuessT;
   }
+}
+
+var Fader = function(rgbController, from, to, time, steps, ks) {
+	var self = {
+		controller: rgbController,
+		currentStep: 0,
+		from: from || 0,
+		to: to || 0,
+		time: time || 1000,
+		steps: steps || 10,
+		ksFade: ks || new KeySpline(0.74,0.1,0.97,0.44),
+		range: 0,
+		channel: "rgb",
+		fadeInteval: null
+	};
+
+	self.startFade = function (channel, from, to, time, steps) {
+		self.channel = channel.toLowerCase();
+		self.steps = steps || self.steps;
+		self.time = time || self.time;
+		self.to = (to === undefined) ? self.to : to;
+		self.from = (from === undefined) ? self.from : from;
+		self.range = (self.from < self.to) ? self.to-self.from : self.from-self.to;
+		self.currentStep = 0;
+		// Clear any existing interval
+		clearInterval(self.fadeInteval);
+		self.fadeInteval = setInterval(function() { self.fade() }, self.time/self.steps);
+	};
+
+	self.fade = function () {
+		var level;
+		if (self.from < self.to) {
+			level = Math.round(self.from + (self.range * self.ksFade.get(self.currentStep)));
+		} else {
+			level = Math.round(self.from - (self.range * self.ksFade.get(self.currentStep)));
+		}
+		CF.log(self.from + ", " + self.to + ", " + self.range);
+		self.currentStep = self.currentStep + (1/self.steps);
+		if (self.channel.indexOf("r") !== -1) {
+			self.controller.setChannelLevel(1, level);
+		}
+		if (self.channel.indexOf("g") !== -1) {
+			self.controller.setChannelLevel(2, level);
+		}
+		if (self.channel.indexOf("b") !== -1) {
+			self.controller.setChannelLevel(3, level);
+		}
+		if (self.currentStep >= 1) {
+			// Finished the fade
+			self.stopFade();
+		}
+	};
+
+	self.stopFade = function () {
+		clearInterval(self.fadeInteval);
+	};
+
+	return self;
 }
