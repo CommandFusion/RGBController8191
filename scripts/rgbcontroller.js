@@ -115,7 +115,7 @@ var RGBController = function(params) {
 
 		if (self.CFLink.id) {
 			args.unshift(0xF2, self.CFLink.id, 0xF3);
-			output = "\xF2" + String.fromCharCode(self.CFLink.id) + "\xF3" + self.CFLink.command + "\xF4" + (self.CFLink.module == "" ? "" : self.CFLink.module + "|") + (self.CFLink.port == "" ? "" : "P" + ("0"+self.CFLink.port).splice(-2) + ":") + String.fromCharCode.apply(null, args) + "\xF5\xF5";
+			output = "\xF2" + String.fromCharCode(self.CFLink.id) + "\xF3" + self.CFLink.command + "\xF4" + (self.CFLink.module == "" ? "" : (self.CFLink.module.indexOf("M") != 0 ? "M" + self.CFLink.module : self.CFLink.module) + "|") + (self.CFLink.port == "" ? "" : "P" + ("0"+self.CFLink.port).slice(-2) + ":") + String.fromCharCode.apply(null, args) + "\xF5\xF5";
 		} else {
 			output = String.fromCharCode.apply(null, args);
 		}
